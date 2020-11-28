@@ -1,6 +1,6 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 3fr 9fr;
+    grid-template-columns: 4fr 8fr;
 }
 
 .dialogsItems {
@@ -8,13 +8,34 @@
 }
 
 .dialog {
-
+ display: grid;
+ grid-template-columns: 3fr 9fr;
 }
 
 .messeges {
-    padding: 10px;
+    display: grid;  
+    padding: 0 100px;
 }
 
-.messege {
+.messege:nth-child(even) {
+    justify-self: end;
+}
 
+
+
+.messege {
+    
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 5px;
+    width: fit-content;
+    
+}
+
+.avatar {
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+    overflow: hidden;
 }

@@ -1,0 +1,34 @@
+.friends {
+    grid-area: s;
+    background-color: #673AB7;
+    /* box-shadow: inset  0 0 10px #512DA8; */
+}
+
+.friends h3 {
+    color: white;
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.friendLinks {
+    display: flex;
+    justify-content: space-around;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.wrapper img {
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.name {
+    text-align: center;;
+}
