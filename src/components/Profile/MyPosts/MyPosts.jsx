@@ -4,19 +4,23 @@ import Post from './Post/Post';
 
 const MyPosts = (props) => {
 
-  let postsElements = props.post_props.posts.map(post => <Post message={post.message} />)
+  let postsElements = props.store.getState().postsPage.posts.map(post => <Post message={post.message} />)
 
   let newPostElement = React.createRef();
 
 
   let buttonEvent = () => {    
-    props.addPost();
+    // props.store.addPost();
+    props.store.dispatch({type: 'ADD-POST'})
     
   }
  
   let onTextChange = () => {    
     let text = newPostElement.current.value;
-    props.updateNewPostText(text);
+    // props.store.updateNewPostText(text);
+    props.store.dispatch({type: 'UPDATE-NEW-POST-TEXT',
+                       newText: text,
+  });
   }
 
   return (
@@ -25,7 +29,7 @@ const MyPosts = (props) => {
       <h3>My posts</h3>
       <div>
         <div>
-          <textarea onChange = { onTextChange } ref = { newPostElement } value = {props.post_props.newPostText}/>
+          <textarea onChange = { onTextChange } ref = { newPostElement } value = {props.store.getState().postsPage.newPostText}/>
         </div>
         <div>
           <button onClick={ buttonEvent }>add post</button>
