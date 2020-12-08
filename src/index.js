@@ -4,9 +4,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import store from './components/Redux/state';
-// import state from './components/Redux/state';
-// import {addPost, updateNewPostText, addMessage, updateNewMessageText, subscribe} from './components/Redux/state';
-
 
 
  let renderEntireTree = () => {

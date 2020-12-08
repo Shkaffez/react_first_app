@@ -1,4 +1,7 @@
-// let _callSubscriber = () => {};
+import dialogsReduser from "./DialogsPage_Reduser";
+import postsReduser from "./PostsPage_Reduser";
+
+
 
 let store = {
   _state: {
@@ -43,41 +46,11 @@ let store = {
         this._callSubscriber = observer;
   },
 
-
   dispatch (action) {
-    switch(action.type) {
-      case 'ADD-POST':
-        let post = {
-          id: parseInt(this._state.postsPage.posts[this._state.postsPage.posts.length - 1].id + 1),
-          message: this._state.postsPage.newPostText
-        }
-        this._state.postsPage.posts.push(post);
-        this._state.postsPage.newPostText = '';
-        this._callSubscriber(this._state);
-        break;
-      case 'UPDATE-NEW-POST-TEXT':
-        this._state.postsPage.newPostText = action.newText;
-        this._callSubscriber(this._state);
-        break;
-      case 'ADD-MESSAGE':
-        let message = {
-          id: parseInt(this._state.dialogsPage.messages[this._state.dialogsPage.messages.length - 1].id + 1),
-          message: this._state.dialogsPage.newMessageText
-        }
-    
-        this._state.dialogsPage.messages.push(message);
-        this._state.dialogsPage.newMessageText = '';
-        this._callSubscriber(this._state);
-        break;
-      case 'UPDATE-NEW-MESSAGE-TEXT':
-        this._state.dialogsPage.newMessageText = action.newMessage;
-        this._callSubscriber(this._state);
-        break;
-      default: console.log('error: wrong type');
-    }
-  }
-
+    this._state.postsPage = postsReduser(this._state.postsPage, action);
+    this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action);
+    this._callSubscriber(this._state);    
+  }  
 }
-
 export default store;
 
