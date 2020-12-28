@@ -3,23 +3,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import store from './components/Redux/state';
+import store from './components/Redux/ReduxStore';
+import { Provider } from 'react-redux';
 
 
- let renderEntireTree = () => {
+ 
   ReactDOM.render(
     <React.StrictMode>
-      <App store={ store }/>
+    <Provider store={store}>
+      <App />
+    </Provider>
     </React.StrictMode>,
     document.getElementById('root')
   );
-} 
-
-renderEntireTree(store.getState());
-
-store.subscribe(renderEntireTree);
+  window.state = store.getState();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+

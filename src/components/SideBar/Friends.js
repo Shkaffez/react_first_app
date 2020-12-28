@@ -4,8 +4,8 @@ import style from './Friends.module.css'
 
 const Friends = (props) => {
     
-    let friendsElements = props.store.getState().sideBar.friendLink.map(friend => <FriendLink avatarSrc={friend.avatarSrc} 
-                                                                     name={friend.name}/>);
+    let friendsElements = props.friendLink.map(friend => <FriendLink avatarSrc={friend.avatarSrc} 
+                                                                     name={friend.name} key={friend.id}/>);
 
     return (
         <div className={style.friends}>
