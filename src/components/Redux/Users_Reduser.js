@@ -10,7 +10,9 @@ export const unfollowAC = (userId) => ({ type: UNFOLLOW, userId });
 export const setUserAC = (users) => ({ type: SET_USERS, users });
 
 let initialState = {
-  users: []
+  users: [],
+  pageSize: 5,
+  totalUserCount: 0
 }
 
 const usersReduser = (state = initialState, action) => {
@@ -23,7 +25,7 @@ const usersReduser = (state = initialState, action) => {
         ...state,
         users: state.users.map(u => {
           if (u.id === action.userId) {
-            return { ...u, isFollow: true };
+            return { ...u, followed: true };
           }
           return u;
         })
@@ -33,12 +35,12 @@ const usersReduser = (state = initialState, action) => {
         ...state,
         users: state.users.map(u => {
           if (u.id === action.userId) {
-            return { ...u, isFollow: false };
+            return { ...u, followed: false };
           }
           return u;
         })
       }
-    case SET_USERS:
+    case SET_USERS:      
       return {
         ...state,
         users: [...state.users, ...action.users]
