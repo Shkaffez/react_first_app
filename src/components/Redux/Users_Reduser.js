@@ -16,7 +16,7 @@ export const setTotalUsersCountAC = (totalCount) => ({ type: SET_TOTAL_USERS_COU
 
 let initialState = {
   users: [],
-  pageSize: 100,
+  pageSize: 5,
   totalUsersCount: 0,
   currentPage: 1
 }
@@ -54,7 +54,7 @@ const usersReduser = (state = initialState, action) => {
     case SET_TOTAL_USERS_COUNT:
       return {
         ...state,
-        totalUsersCount: action.totalCount
+        totalUsersCount: action.totalCount > 100 ? 100 : action.totalCount
       }
     case SET_CURRENT_PAGE:
       return {
