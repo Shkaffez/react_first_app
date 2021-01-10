@@ -17,8 +17,7 @@ class UsersContainer extends React.Component {
     onPageChanged = (pageNumper) => {
         this.props.setCurrentPage(pageNumper);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumper}&count=${this.props.pageSize}`).then(response => {
-            this.props.setUser(response.data.items);
-            debugger;
+            this.props.setUser(response.data.items);            
         });
     }
     
@@ -30,6 +29,7 @@ class UsersContainer extends React.Component {
                        users={this.props.users}
                        unfollow={this.props.unfollow}
                        follow={this.props.follow}
+                       isFetching={this.props.isFetching}
 
                         />
     }
@@ -41,7 +41,8 @@ const mapStateToProps = (state) => {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
 
     }
 }
