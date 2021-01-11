@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Users.module.css';
 import userPhoto from '../../assets/images/user.jpg';
-import preloader from '../../assets/images/Spinner-1s-200px.svg'
+import preloader from '../../assets/images/Spinner-1s-200px.svg';
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -10,8 +10,6 @@ const Users = (props) => {
         pages.push(i);
     }
     return (
-        <>
-            { props.isFetching ? <img src={preloader} alt="preloader"/> : null}
             <div>
                 <div>
                     {pages.map(p => {
@@ -36,8 +34,7 @@ const Users = (props) => {
                     </div>)
                 }
 
-            </div>
-        </>
+            </div>       
     )
 
 
