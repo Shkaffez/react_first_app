@@ -18,7 +18,7 @@ export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isF
 
 let initialState = {
   users: [],
-  pageSize: 5,
+  pageSize: 6,
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: false,

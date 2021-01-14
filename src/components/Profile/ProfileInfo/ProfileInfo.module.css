@@ -6,3 +6,12 @@
 .item {
     padding-left: 20px;
 }
+
+.userAvatar {
+    width: 150px;
+    height: auto;;
+}
+
+.profileWrapper {
+    padding: 20px 0px 0px 20px;
+}
