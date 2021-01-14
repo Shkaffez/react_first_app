@@ -2,11 +2,8 @@ const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
-export const addPostActionCreator = () => ({ type: ADD_POST });
-export const updateNewPostTextActionCreator = (newText) => ({
-  type: UPDATE_NEW_POST_TEXT,
-  newText: newText,
-});
+export const addPost = () => ({ type: ADD_POST });
+export const updateNewPostText = (newText) => ({ type: UPDATE_NEW_POST_TEXT,  newText: newText,});
 export const setUserProfile = (userProfile) => ({ type: SET_USER_PROFILE, userProfile: userProfile })
 
 let initialState = {
@@ -14,13 +11,11 @@ let initialState = {
     { id: 1, message: "Hi, how are you?" },
     { id: 2, message: "It is my first post" }
   ],
-  newPostText: ''
+  newPostText: '',
+  userProfile: null,
 }
 
 const postsReduser = (state = initialState, action) => {
-
-
-
   switch (action.type) {
     case ADD_POST: {
       let post = {
@@ -39,6 +34,12 @@ const postsReduser = (state = initialState, action) => {
         ...state,
         newPostText: action.newText
       };
+    }
+    case SET_USER_PROFILE: {
+      return {
+        ...state,
+        userProfile: action.userProfile
+      }
     }
     default:
       return state;
