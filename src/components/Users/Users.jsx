@@ -26,7 +26,8 @@ const Users = (props) => {
                     </div>
                     {
                         u.followed
-                            ? <button onClick={() => {
+                            ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                props.toggleFollowingInPropress(true, u.id);
                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
                                     { withCredentials: true,
                                       headers: {
@@ -35,10 +36,12 @@ const Users = (props) => {
                                     }).then(response => {
                                         if (response.data.resultCode === 0) {
                                             props.unfollow(u.id);
-                                        }                                        
+                                        }  
+                                        props.toggleFollowingInPropress(false, u.id);                                      
                                     });
                             }}>follow</button>
-                            : <button onClick={() => {
+                            : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                props.toggleFollowingInPropress(true, u.id);
                                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},
                                     { withCredentials: true,
                                         headers: {
@@ -47,7 +50,8 @@ const Users = (props) => {
                                      }).then(response => {
                                         if (response.data.resultCode === 0) {
                                             props.follow(u.id);
-                                        }                                        
+                                        }   
+                                        props.toggleFollowingInPropress(false, u.id);                                     
                                     });
                             }} >unfollow</button>
                     }
