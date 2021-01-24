@@ -2,6 +2,7 @@ import React from 'react';
 import style from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader';
 import userPhoto from '../../../assets/images/user.jpg';
+import ProfileStatus from './ProfileStatus'
 
 const ProfileInfo = (props) => {
   if (!props.userProfile) {
@@ -13,6 +14,9 @@ const ProfileInfo = (props) => {
       <div className={style.profileWrapper}>
         <img src={props.userProfile.photos.small || userPhoto} alt="User Avatar" className={style.userAvatar} />
         <div className={style.item}>{props.userProfile.fullName}</div>
+        <ProfileStatus status={props.status}
+                       updateStatus={props.updateStatus}
+         />
         {props.userProfile.lookingForAJob && <div>В поиске работы!</div>}
         <div className={style.contacs}>
             {props.userProfile.contacts === {} && <h3>Список контактов</h3>}
