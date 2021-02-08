@@ -7,7 +7,7 @@ const Header = (props) => {
         <header className={style.header}>
             {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQsSfFXzNR5_br9ciiN0CLf8fgm74zWosgwgQ&usqp=CAU"></img> */}
             <div className={style.login_block}>
-                {props.login? props.login : <NavLink to={'/login'}>Login</NavLink>}                
+                {props.login ? <div>{props.login} <button onClick={props.logout}>Log out</button></div> : <NavLink to={'/login'}>Login</NavLink>}                
             </div>
         </header>
     )

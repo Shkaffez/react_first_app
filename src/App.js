@@ -7,7 +7,7 @@ import FriendsContainer from './components/SideBar/FriendsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
-import Login from './components/Dialogs/Login/login';
+import Login from './components/Login/login';
 
 
 const App = (props) => {

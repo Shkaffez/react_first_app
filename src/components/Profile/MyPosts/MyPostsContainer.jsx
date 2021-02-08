@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addPost, updateNewPostText } from '../../Redux/PostsPage_Reduser';
+import { addPost } from '../../Redux/PostsPage_Reduser';
 import MyPosts from './MyPosts';
 
 
@@ -10,6 +10,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const MyPostsContainer = connect(mapStateToProps, { addPost, updateNewPostText })(MyPosts);
+const MyPostsContainer = connect(mapStateToProps, { addPost })(MyPosts);
 
 export default MyPostsContainer;

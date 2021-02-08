@@ -5,8 +5,7 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
-export const addPost = () => ({ type: ADD_POST });
-export const updateNewPostText = (newText) => ({ type: UPDATE_NEW_POST_TEXT, newText: newText, });
+export const addPost = (postText) => ({ type: ADD_POST, postText });
 export const setUserProfile = (userProfile) => ({ type: SET_USER_PROFILE, userProfile: userProfile });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
 
@@ -14,8 +13,7 @@ let initialState = {
   posts: [
     { id: 1, message: "Hi, how are you?" },
     { id: 2, message: "It is my first post" }
-  ],
-  newPostText: '',
+  ],  
   userProfile: null,
   status: "",
 }
@@ -25,12 +23,11 @@ const postsReduser = (state = initialState, action) => {
     case ADD_POST: {
       let post = {
         id: parseInt(state.posts[state.posts.length - 1].id + 1),
-        message: state.newPostText
+        message: action.postText
       }
       return {
         ...state,
-        posts: [...state.posts, post],
-        newPostText: ''
+        posts: [...state.posts, post],        
       };
 
     }

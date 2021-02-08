@@ -1,0 +1,10 @@
+.form {
+    display: gird;    
+    
+}
+
+.formControl span {
+    color: red;
+    font-weight: bold;
+    
+}
