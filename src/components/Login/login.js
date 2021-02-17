@@ -5,6 +5,7 @@ import { minLength, required, composeValidators } from '../../validators/validat
 import style from "./login.module.css";
 import { login, logout } from "../Redux/Auth_Reduser"
 import { Redirect } from 'react-router-dom';
+import { FORM_ERROR } from 'final-form';
 
 const Login = (props) => {
   if(props.isAuth) {
@@ -23,8 +24,11 @@ const Login = (props) => {
 
 const MyForm = (props) => (
   <Form
-    onSubmit={values => { props.login(values.email, values.password, values.rememberMe) }}
-    render={({ handleSubmit, form, submitting, pristine, values    }) => (
+    onSubmit={values => { 
+      props.login(values.email, values.password, values.rememberMe);     
+      return {[FORM_ERROR] : props.loginError}
+      }}
+    render={({ handleSubmit, form, submitting, pristine, values, submitError }) => (
       <form onSubmit={handleSubmit}>
         <div className={style.form}>
           <div>            
@@ -32,7 +36,9 @@ const MyForm = (props) => (
             {({input, meta}) => (
               <div className={style.formControl}>
                 <input {...input} type="text" placeholder="email" />
-                {meta.error && meta.touched && <span>{meta.error}</span>}
+                {(meta.error || meta.submitError) && meta.touched && (
+                  <span>{meta.error || meta.submitError}</span>
+                )}
               </div>
             )}
             </Field>
@@ -47,6 +53,7 @@ const MyForm = (props) => (
             )}
             </Field>
           </div>
+            {submitError && <div>{submitError}</div>}
           <div>            
             <Field name="rememberMe" component="input" type="checkbox"/>remember me
           </div>
@@ -61,7 +68,8 @@ const MyForm = (props) => (
 
 
 const mapStateToProps = (state) => ({
-  isAuth: state.auth.isAuth
+  isAuth: state.auth.isAuth,
+  loginError: state.auth.loginError
 })
 
 

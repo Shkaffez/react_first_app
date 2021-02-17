@@ -6,7 +6,7 @@ export const InputForm = (props) => {
     return (
         <Form 
             onSubmit={props.onSubmit}
-            render={({ handleSubmit, pristine, submiting, form }) => (
+            render={({ handleSubmit, reset }) => (
                 <form onSubmit={handleSubmit}>
                     <div>
                         <Field name="textArea" component="textarea" type="text"/>

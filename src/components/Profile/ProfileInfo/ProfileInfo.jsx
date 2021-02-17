@@ -2,7 +2,8 @@ import React from 'react';
 import style from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader';
 import userPhoto from '../../../assets/images/user.jpg';
-import ProfileStatus from './ProfileStatus'
+import Blue_style from '../../../assets/images/Blue-style.jpg';
+import ProfileStatusWithHooks from './ProfileStatusWithHooks'
 
 const ProfileInfo = (props) => {
   if (!props.userProfile) {
@@ -10,11 +11,11 @@ const ProfileInfo = (props) => {
   }
   return (
     <div>
-      <img className={style.profile__img} alt="" src="https://s2.best-wallpaper.net/wallpaper/1920x1080/1806/Blue-style-figure-layers-shadows-abstract_1920x1080.jpg"></img>
+      <img className={style.profile__img} alt="" src={Blue_style}></img>
       <div className={style.profileWrapper}>
         <img src={props.userProfile.photos.small || userPhoto} alt="User Avatar" className={style.userAvatar} />
         <div className={style.item}>{props.userProfile.fullName}</div>
-        <ProfileStatus status={props.status}
+        <ProfileStatusWithHooks status={props.status}
                        updateStatus={props.updateStatus}
          />
         {props.userProfile.lookingForAJob && <div>В поиске работы!</div>}

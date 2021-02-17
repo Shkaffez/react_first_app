@@ -22,7 +22,7 @@ const Dialogs = (props) => {
  
 
   let addNewMessage = (values) => {
-    props.addMessage(values.textArea);
+    props.addMessage(values.textArea);    
   }
 
   if(!props.isAuth) return <Redirect to={"/login"} />;
@@ -34,9 +34,7 @@ const Dialogs = (props) => {
       </div>
       <div className={style.messeges}>
         {messagesElements}
-        <InputForm onSubmit={addNewMessage} />
-        {/* <textarea onChange={ onMessageChange } ref={ message } value={props.newMessageText}></textarea>
-        <button onClick= { addMessage }>addMessage</button> */}
+        <InputForm onSubmit={addNewMessage} />        
       </div>
     </div>
   )
