@@ -1,9 +1,9 @@
 import { profileAPI } from "../../api/api";
 
-const ADD_POST = 'ADD_POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_STATUS = 'SET_STATUS';
+const ADD_POST = 'samurai-network/postPage/ADD_POST';
+const UPDATE_NEW_POST_TEXT = 'samurai-network/postPage/UPDATE_NEW_POST_TEXT';
+const SET_USER_PROFILE = 'samurai-network/postPage/SET_USER_PROFILE';
+const SET_STATUS = 'samurai-network/postPage/SET_STATUS';
 
 export const addPost = (postText) => ({ type: ADD_POST, postText });
 export const setUserProfile = (userProfile) => ({ type: SET_USER_PROFILE, userProfile: userProfile });
@@ -13,7 +13,7 @@ let initialState = {
   posts: [
     { id: 1, message: "Hi, how are you?" },
     { id: 2, message: "It is my first post" }
-  ],  
+  ],
   userProfile: null,
   status: "",
 }
@@ -27,7 +27,7 @@ const postsReduser = (state = initialState, action) => {
       }
       return {
         ...state,
-        posts: [...state.posts, post],        
+        posts: [...state.posts, post],
       };
 
     }
@@ -55,29 +55,21 @@ const postsReduser = (state = initialState, action) => {
   }
 }
 
-export const getUserProfile = (userId) => {
-  return (dispatch) => {
-    profileAPI.getProfile(userId).then(data => {
-      dispatch(setUserProfile(data));
-    });
-  }
+export const getUserProfile = (userId) => async (dispatch) => {
+  let data = await profileAPI.getProfile(userId);
+  dispatch(setUserProfile(data));
 }
 
-export const requesUserstatus = (userId) => {
-  return (dispatch) => {
-    profileAPI.getStatus(userId).then(data => {
-      dispatch(setStatus(data));
-    });
-  }
+
+export const requesUserstatus = (userId) => async (dispatch) => {
+  let data = await profileAPI.getStatus(userId)
+  dispatch(setStatus(data));
 }
 
-export const updateStatus = (status) => {
-  return (dispatch) => {
-    profileAPI.updateStatus(status).then(data => {
-      if (data.resultCode === 0) {        
-        dispatch(setStatus(status));
-      }
-    });
+export const updateStatus = (status) => async (dispatch) => {
+  let data = await profileAPI.updateStatus(status)
+  if (data.resultCode === 0) {
+    dispatch(setStatus(status));
   }
 }
 

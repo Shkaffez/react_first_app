@@ -8,61 +8,56 @@ import { Redirect } from 'react-router-dom';
 import { FORM_ERROR } from 'final-form';
 
 const Login = (props) => {
-  if(props.isAuth) {
+  if (props.isAuth) {
     return <Redirect to="/profile" />
   }
   return <div>
-
-
     <h1>Login</h1>
     <MyForm {...props} />
   </div>
 }
 
 
-
-
-const MyForm = (props) => (
+const MyForm = ({ login, loginError }) => (
   <Form
-    onSubmit={values => { 
-      props.login(values.email, values.password, values.rememberMe);     
-      return {[FORM_ERROR] : props.loginError}
-      }}
-    render={({ handleSubmit, form, submitting, pristine, values, submitError }) => (
+    onSubmit={values => {
+      login(values.email, values.password, values.rememberMe);
+      return { [FORM_ERROR]: loginError }
+    }}
+    render={({ handleSubmit, form, submitting, pristine, submitError }) => (
       <form onSubmit={handleSubmit}>
         <div className={style.form}>
-          <div>            
+          <div>
             <Field name="email" component="input" validate={required}>
-            {({input, meta}) => (
-              <div className={style.formControl}>
-                <input {...input} type="text" placeholder="email" />
-                {(meta.error || meta.submitError) && meta.touched && (
-                  <span>{meta.error || meta.submitError}</span>
-                )}
-              </div>
-            )}
+              {({ input, meta }) => (
+                <div className={style.formControl}>
+                  <input {...input} type="text" placeholder="email" />
+                  {(meta.error || meta.submitError) && meta.touched && (
+                    <span>{meta.error || meta.submitError}</span>
+                  )}
+                </div>
+              )}
             </Field>
           </div>
-          <div>            
+          <div>
             <Field name="password" component="input" validate={composeValidators(required, minLength(5))}>
-            {({input, meta}) => (
-              <div className={style.formControl}>
-                <input {...input} type="password" placeholder="password" />
-                {meta.error && meta.touched && <span>{meta.error}</span>}
-              </div>
-            )}
+              {({ input, meta }) => (
+                <div className={style.formControl}>
+                  <input {...input} type="password" placeholder="password" />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+              )}
             </Field>
           </div>
-            {submitError && <div>{submitError}</div>}
-          <div>            
-            <Field name="rememberMe" component="input" type="checkbox"/>remember me
+          {submitError && <div>{submitError}</div>}
+          <div>
+            <Field name="rememberMe" component="input" type="checkbox" />remember me
           </div>
         </div>
         <button type="submit" disabled={submitting || pristine}>submit</button>
         <button type="button" onClick={form.reset} disabled={submitting || pristine}>reset</button>
       </form>
     )}
-
   />
 )
 
@@ -73,4 +68,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, {login, logout})(Login);
+export default connect(mapStateToProps, { login, logout })(Login);

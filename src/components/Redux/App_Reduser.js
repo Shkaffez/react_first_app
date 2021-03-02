@@ -1,4 +1,4 @@
-import { authAPI } from "../../api/api";
+
 import { authentication } from "./Auth_Reduser";
 
 
@@ -11,8 +11,6 @@ export const initializedSuccsess = () => ({ type: INITIALIZED_SUCCSESS });
 
 let initialState = {
   isInitialized: false,
-  
-  
 }
 
 const appReduser = (state = initialState, action) => {
