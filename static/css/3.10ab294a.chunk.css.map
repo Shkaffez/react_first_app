@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/Login/login.module.css"],"names":[],"mappings":"AAAA,mBACI,YAEJ,CAEA,+BACI,SAAU,CACV,eAEJ","file":"3.10ab294a.chunk.css","sourcesContent":[".form {\r\n    display: gird;    \r\n    \r\n}\r\n\r\n.formControl span {\r\n    color: red;\r\n    font-weight: bold;\r\n    \r\n}\r\n\r\n"]}
