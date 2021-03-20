@@ -1,16 +1,19 @@
+
 import React from 'react';
 import { Field, Form } from 'react-final-form';
 
 
-const ProfileDataEditForm = ({ onSubmit, initialValues, ...props }) => {
-
-  return <Form
+const ProfileDataEditForm = ({  initialValues, onSubmit, ...props }) => {
+  
+  
+  return <Form  
     onSubmit={onSubmit}
     initialValues={initialValues}
-    render={({ handleSubmit, form, values }) => (
+    render={({ handleSubmit, submitError }) => (
       <form onSubmit={handleSubmit}>
         <div>
           <button onClick={props.goToEditMode}>Сохранить</button> <br />
+          {submitError && <div>{submitError}</div>}
           <div><b>Full name</b></div>
           <Field name="fullName" component="input" type="text" placeholder="name" />
           <div><b>Looking for a job</b></div>
@@ -22,10 +25,12 @@ const ProfileDataEditForm = ({ onSubmit, initialValues, ...props }) => {
           <Field name="aboutMe" component="textarea" type="text" placeholder="About me" />
           <div>
             <b>Контакты:</b> {Object.keys(props.userProfile.contacts).map(key => {
-              return <div><b>{key}:</b></div>
+              return <div key={key}>
+              <div><b>{key}:</b></div>
+              <Field name={"contacts." + key} component="input" type="text" placeholder={key} />
+              </div>
             })}
           </div>
-
         </div>
       </form>
     )}

@@ -18,10 +18,10 @@ const Login = (props) => {
 }
 
 
-const MyForm = ({ login, loginError }) => (
+const MyForm = ({ login, loginError, captchaUrl }) => (
   <Form
     onSubmit={values => {
-      login(values.email, values.password, values.rememberMe);
+      login(values.email, values.password, values.rememberMe, values.captcha);
       return { [FORM_ERROR]: loginError }
     }}
     render={({ handleSubmit, form, submitting, pristine, submitError }) => (
@@ -54,6 +54,14 @@ const MyForm = ({ login, loginError }) => (
             <Field name="rememberMe" component="input" type="checkbox" />remember me
           </div>
         </div>
+
+        {captchaUrl ? <img src={captchaUrl} alt="captch_image"/> : undefined}
+        {captchaUrl ? <div>
+            <Field name="captcha" component="input" type="text" />symbols from image
+          </div>
+           : undefined}
+        
+
         <button type="submit" disabled={submitting || pristine}>submit</button>
         <button type="button" onClick={form.reset} disabled={submitting || pristine}>reset</button>
       </form>
@@ -64,7 +72,8 @@ const MyForm = ({ login, loginError }) => (
 
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
-  loginError: state.auth.loginError
+  loginError: state.auth.loginError,
+  captchaUrl: state.auth.captchaUrl
 })
 
 

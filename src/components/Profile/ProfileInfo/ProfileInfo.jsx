@@ -5,6 +5,7 @@ import userPhoto from '../../../assets/images/user.jpg';
 import Blue_style from '../../../assets/images/Blue-style.jpg';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks'
 import ProfileDataEditForm from './ProfileDataEditForm';
+import { FORM_ERROR } from 'final-form';
 
 const ProfileInfo = (props) => {
 
@@ -21,11 +22,13 @@ const ProfileInfo = (props) => {
   }
 
   const onSubmit = values => {
-    props.saveProfile(values);
-    setEditMod(false);
+      props.saveProfile(values);   
+      setEditMod(false);     
+      return { [FORM_ERROR]: props.editProfileDataError }
+     
   };
-  
 
+  
   return (
     <>
       <img className={style.profile__img} alt="" src={Blue_style}></img>
@@ -36,7 +39,10 @@ const ProfileInfo = (props) => {
         <ProfileStatusWithHooks status={props.status}
           updateStatus={props.updateStatus}
         />
-        {editMod ? <ProfileDataEditForm onSubmit={onSubmit} initialValues={props.userProfile} /> 
+        {editMod ? <ProfileDataEditForm onSubmit={onSubmit} initialValues={props.userProfile} 
+        userProfile={props.userProfile} editProfileDataError={props.editProfileDataError}
+        saveProfile={props.saveProfile}
+         /> 
         : <ProfileData isOwner={props.isOwner} 
           goToEditMode={()=>{setEditMod(true)}} userProfile={props.userProfile}/> }
       </div>

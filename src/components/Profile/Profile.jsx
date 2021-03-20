@@ -11,6 +11,8 @@ const Profile = (props) => {
                    updateStatus={props.updateStatus}
                    savePhoto={props.savePhoto}
                    saveProfile={props.saveProfile}
+                   editProfileDataError={props.editProfileDataError}
+                  //  setSaveProfileSuccess={props.setSaveProfileSuccess}
        />
       <MyPostsContainer />
       

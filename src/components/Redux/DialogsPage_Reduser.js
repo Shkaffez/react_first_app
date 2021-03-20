@@ -22,8 +22,7 @@ let initialState = {
 
 const dialogsReduser = (state = initialState, action) => {
   switch(action.type) {
-    case ADD_MESSAGE: 
-    debugger;
+    case ADD_MESSAGE:    
         let message = {
           
           id: parseInt(state.messages[state.messages.length - 1].id + 1),

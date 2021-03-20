@@ -9,48 +9,48 @@ const instance = axios.create({
 });
 
 export const usersAPI = {
-    getUsers (currentPage, pageSize) {
+    getUsers(currentPage, pageSize) {
         return instance.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`,
             { withCredentials: true }).then(response => response.data);
     },
 
-    follow (id) {
+    follow(id) {
         return instance.post(`follow/${id}`).then(response => response.data);
     },
 
-    unfollow (id) {
+    unfollow(id) {
         return instance.delete(`follow/${id}`).then(response => response.data);
     }
 }
 
 export const authAPI = {
-    authMe () {        
+    authMe() {
         return instance.get('auth/me').then(response => response.data);
-    }, 
-
-    login (email, password, rememberMe = false) {        
-        return instance.post('/auth/login',  { email, password, rememberMe }).then(response => response.data);
     },
 
-    logout () {        
+    login(email, password, rememberMe = false, captcha = null) {
+        return instance.post('/auth/login', { email, password, rememberMe, captcha }).then(response => response.data);
+    },
+
+    logout() {
         return instance.delete('/auth/login').then(response => response.data);
     }
 }
 
 export const profileAPI = {
-    getProfile (userId) {
+    getProfile(userId) {
         return instance.get('profile/' + userId).then(response => response.data);
     },
 
-    getStatus (userId) {
+    getStatus(userId) {
         return instance.get('profile/status/' + userId).then(response => response.data);
     },
 
-    updateStatus (status) {
+    updateStatus(status) {
         return instance.put('profile/status/', { status: status }).then(response => response.data);
     },
 
-    savePhoto (photoFile) {
+    savePhoto(photoFile) {
         const formData = new FormData();
         formData.append("image", photoFile)
         return instance.put('profile/photo/', formData, {
@@ -60,7 +60,13 @@ export const profileAPI = {
         }).then(response => response.data);
     },
 
-    saveProfile (profile) {        
+    saveProfile(profile) {
         return instance.put('profile', profile).then(response => response.data);
+    }
+}
+
+export const securityAPI = {
+    getCaptchaUrl () {
+        return instance.get('security/get-captcha-url').then(response => response.data);
     }
 }
