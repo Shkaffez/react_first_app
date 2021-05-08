@@ -14,9 +14,8 @@ import HeaderContainer from './components/Header/HeaderContainer';
 const Login = React.lazy(() => import('./components/Login/login'));
 
 
-
 class App extends React.Component {
-
+    
   componentDidMount() {
     this.props.initializeApp();
   }
@@ -33,7 +32,7 @@ class App extends React.Component {
         <div className="app-wrapper-content">
           <Route path="/dialogs" render={() => <DialogsContainer />} />
           <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
-          <Route path="/users" render={() => <UsersContainer />} />
+          <Route path="/users" render={() => <UsersContainer  pageTitile={"Самураи"}/>} />
           <Suspense fallback={<div>загрузка...</div>}>
             <Route path="/login" render={() => <Login />} />
           </Suspense>

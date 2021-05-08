@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Redirect } from 'react-router-dom';
-import { InputForm } from '../common/inputForm';
+import { InputForm, IValues } from '../common/inputForm';
+import { DialogsItemType, MessagesItemType } from '../Redux/DialogsPage_Reduser';
 import DialogItem from './DialogItem/DialogsItem';
 import style from './Dialogs.module.css';
 import Message from './Message/Message';
 
+type PropsType = {
+  dialogs: Array<DialogsItemType>
+  messages: Array<MessagesItemType>
+  addMessage: (message : string | undefined) => void
+  isAuth: boolean
+  onSubmit: (values : IValues) => void
+}
 
 
-
-const Dialogs = (props) => {
+const Dialogs : FC<PropsType> = (props) => {
 
   let dialogsElements = props.dialogs.map(element => <DialogItem name={element.name} id={element.id}
                                                                                   key={element.id} />);
@@ -21,7 +28,7 @@ const Dialogs = (props) => {
 
  
 
-  let addNewMessage = (values) => {
+  let addNewMessage = (values : IValues) => {
     props.addMessage(values.textArea);    
   }
 

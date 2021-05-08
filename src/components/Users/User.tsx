@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { FC } from 'react';
 import style from './Users.module.css';
 import userPhoto from '../../assets/images/user.jpg';
 import { NavLink } from 'react-router-dom';
+import { IUsers } from '../Redux/Users_Reduser';
 
 
+type PropsType = {
+    user : IUsers
+    followingInProgress : Array<number>;
+    follow : (userId: number) => void;
+    unfollow : (userId: number) => void;
+}
 
-
-const User = ({user, followingInProgress, follow, unfollow, ...props }) => {
+const User : FC<PropsType> = ({user, followingInProgress, follow, unfollow, ...props }) => {
     return (
         <div>
 

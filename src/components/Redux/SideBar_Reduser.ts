@@ -1,5 +1,10 @@
 
-let initialState = {  
+
+interface I_InitialState {
+  friendLink : Array<{ name: string, avatarSrc: string, id: number }>
+}
+
+let initialState : I_InitialState = {  
     friendLink: [
       { 
         name: "Zlata", 
@@ -19,7 +24,7 @@ let initialState = {
     ]  
 }
 
-const sideBarReduser = (state = initialState, action) => {
+const sideBarReduser = (state = initialState, action: any): I_InitialState => {
   return state;
 }
 

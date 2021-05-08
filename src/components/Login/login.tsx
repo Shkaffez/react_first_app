@@ -6,8 +6,20 @@ import style from "./login.module.css";
 import { login, logout } from "../Redux/Auth_Reduser"
 import { Redirect } from 'react-router-dom';
 import { FORM_ERROR } from 'final-form';
+import { AppStateType } from '../Redux/ReduxStore';
 
-const Login = (props) => {
+type MapStatePropsType = {
+  isAuth: boolean
+  loginError: string | null 
+  captchaUrl: string | null
+}
+
+type MapDispatchPropsType = {
+  login : (email: string, password: string, rememberMe: boolean, captcha: string) => void
+  logout : () => void
+}
+
+const Login : React.FunctionComponent<MapStatePropsType & MapDispatchPropsType>= (props) => {
   if (props.isAuth) {
     return <Redirect to="/profile" />
   }
@@ -18,12 +30,13 @@ const Login = (props) => {
 }
 
 
-const MyForm = ({ login, loginError, captchaUrl }) => (
+const MyForm : React.FunctionComponent<MapStatePropsType & MapDispatchPropsType>
+ = ({ login, loginError, captchaUrl }) => (
   <Form
     onSubmit={values => {
       login(values.email, values.password, values.rememberMe, values.captcha);
       return { [FORM_ERROR]: loginError }
-    }}
+    }}  
     render={({ handleSubmit, form, submitting, pristine, submitError }) => (
       <form onSubmit={handleSubmit}>
         <div className={style.form}>
@@ -70,11 +83,17 @@ const MyForm = ({ login, loginError, captchaUrl }) => (
 )
 
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state : AppStateType) : MapStatePropsType => {
+  return {
   isAuth: state.auth.isAuth,
   loginError: state.auth.loginError,
   captchaUrl: state.auth.captchaUrl
-})
+  }
+}
+type OwnPropsType = {
+  
+}
 
 
-export default connect(mapStateToProps, { login, logout })(Login);
+export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>
+(mapStateToProps, { login, logout })(Login);

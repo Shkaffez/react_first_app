@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { FC, ReactNode } from 'react';
 import { Form, Field } from 'react-final-form';
 
 
-export const InputForm = (props) => {
+type PropsType = {
+    onSubmit: (values : IValues) => void
+    
+    
+}
+
+export interface IValues {
+    textArea? : string | undefined
+}
+
+export const InputForm : FC<PropsType> = (props) => {
     return (
         <Form 
             onSubmit={props.onSubmit}
